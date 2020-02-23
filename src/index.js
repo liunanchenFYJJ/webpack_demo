@@ -1,3 +1,3 @@
 
 document.write('index hot reload<br />');
-document.write('hello webpack');
+document.write('hello 4');
