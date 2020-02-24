@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
@@ -43,6 +44,11 @@ module.exports = {
       hash: true,
     }),
     new VueLoaderPlugin(),
+    /** 统一引入jquery 避免导出引用 */
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })
   ],
   resolve: {
     extensions: ['.js', '.vue', 'json'], // 模块化导入 默认这三种类型
