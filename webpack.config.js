@@ -1,6 +1,7 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 
 module.exports = {
@@ -19,6 +20,14 @@ module.exports = {
     filename: 'static/js/main.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      }
+    ]
+  },
   plugins: [
     /** 每次打包之前清空 output 文件夹下所有 */
     new CleanWebpackPlugin(),
@@ -28,11 +37,19 @@ module.exports = {
      * 2. 可以生成创建html入口文件，比如单页面可以生成一个html文件入口，配置N个html-webpack-plugin可以生成N个页面入口
      */
     new htmlWebpackPlugin({
-      filename: './index.html', // html js 打包分层次
+      template: './index.html',
+      // filename: './index.html', // html js 打包分层次
       minify: true, // TODO: 压缩？
       hash: true,
     }),
+    new VueLoaderPlugin(),
   ],
+  resolve: {
+    extensions: ['.js', '.vue', 'json'], // 模块化导入 默认这三种类型
+    alias: { // src别名
+      '@': path.resolve('src'),
+    }
+  },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     port: '8089',
