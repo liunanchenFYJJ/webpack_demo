@@ -8,7 +8,7 @@ export default {
   name: 'Layout',
   mounted() {
     console.log($.prototype);
-    console.log(AX.prototype.constructor === AX);
+    console.log(axios.prototype.constructor === axios);
     console.log('Layout mounted');
     this.getFinalWeather();
   },
