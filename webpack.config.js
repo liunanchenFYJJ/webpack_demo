@@ -47,7 +47,10 @@ module.exports = {
     /** 统一引入jquery 避免导出引用 */
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jQuery: 'jquery'
+      jQuery: 'jquery',
+    }),
+    new webpack.ProvidePlugin({
+      axios: 'axios',
     })
   ],
   resolve: {

@@ -8,26 +8,62 @@ export default {
   name: 'Layout',
   mounted() {
     console.log($.prototype);
+    console.log(AX.prototype.constructor === AX);
     console.log('Layout mounted');
-    this.test_final();
+    this.getFinalWeather();
   },
   methods: {
-    test_normal() {
-      return 'normal function';
+    /** 2. async await */
+    // 只需要关注调用接口，不需要关注 成功/失败 的逻辑
+    // return <Promise>
+    async getCode() {
+      return $.ajax({
+        type: 'GET',
+        url: 'https://apis.map.qq.com/ws/location/v1/ip?key=XWEBZ-RQ2LU-OBGVA-4VNAX-4YU62-B2FDP&output=jsonp',
+        dataType: 'jsonp',
+        data: {},
+      })
     },
-    async test_async() {
-      let a = '12';
-      setTimeout(() => {
-        a = 'async function';
-      }, 2000);
-      return a;
+    async getWeather() {
+      let res = await this.getCode();
+      console.log(res);
+      return $.ajax({
+        type: 'GET',
+        url: 'https://restapi.amap.com/v3/weather/weatherInfo?city=' + res.result.ad_info.adcode + '&key=357209990ef0a6bf419d72b3f8afcc93&extensions=all',
+        data: {},
+      })
     },
-    async test_final() {
-      let a = this.test_normal();
-      let b = await this.test_async();
-      console.log(a);
-      console.log(b);
-    }
+    async getFinalWeather() {
+      let res = await this.getWeather();
+      console.log('finally!');
+      console.log(res);
+    },
+    /** 1. 回调地狱 */
+    /** 注: $.ajax thenable 最新支持 done fail always
+     * remove success error complete
+     */
+    getLocationWeather () {
+      $.ajax({
+        type: 'GET',
+        url: 'https://apis.map.qq.com/ws/location/v1/ip?key=XWEBZ-RQ2LU-OBGVA-4VNAX-4YU62-B2FDP&output=jsonp',
+        dataType: 'jsonp',
+        data: {},
+        success: function (res) {
+          if (res.message === 'query ok' && res.status === 0 && Object.keys(res.result).length > 0) {
+            $.ajax({
+              type: 'GET',
+              url: 'https://restapi.amap.com/v3/weather/weatherInfo?city=' + res.result.ad_info.adcode + '&key=357209990ef0a6bf419d72b3f8afcc93&extensions=all',
+              data: {},
+              success: function (res) {
+                // 逻辑代码
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {}
+            })
+          }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {}
+      })
+    },
   }
 }
 </script>
