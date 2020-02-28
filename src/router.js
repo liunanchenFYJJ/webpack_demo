@@ -23,6 +23,16 @@ const routes = [
   {
     path: '/user/:id/age/:num',
     component: User,
+    children: [
+      {
+        path: 'foo',
+        component: Foo,
+      },
+      {
+        path: 'bar',
+        component: Bar,
+      },
+    ]
   },
 ];
 
