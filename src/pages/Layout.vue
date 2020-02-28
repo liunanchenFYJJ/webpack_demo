@@ -1,6 +1,8 @@
 <template>
   <div>
     Layout
+    <router-link to="foo">foo</router-link>
+    <router-link to="bar">bar</router-link>
   </div>
 </template>
 <script>

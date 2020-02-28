@@ -5,7 +5,7 @@ import router from '@/router'; // vue-router的实例 项目比较大时 独立�
 
 new Vue({
   el: '#app',
-  router: router,
+  router,
   // render: (h) => h('div', {}, 'hello webpack'),
   render: (h) => h(App),
 })
