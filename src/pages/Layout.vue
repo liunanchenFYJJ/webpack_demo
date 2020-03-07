@@ -3,6 +3,8 @@
     Layout
     <router-link to="foo">foo</router-link>
     <router-link to="bar">bar</router-link>
+    <button @click="toFoo">foo</button>
+    <button>bar</button>
   </div>
 </template>
 <script>
@@ -15,6 +17,9 @@ export default {
     this.getFinalWeather();
   },
   methods: {
+    toFoo() {
+      this.$router.push({path: 'test', query: {name: 's'}});
+    },
     /** 2. async await */
     // 只需要关注调用接口，不需要关注 成功/失败 的逻辑
     // return <Promise>
