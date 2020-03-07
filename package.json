@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack --progress --hide-modules --profile --config webpack.config.js"
+    "build": "webpack --progress --hide-modules --profile --config webpack.config.js",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^3.2.0"
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.1.0"
   }
 }
