@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: https://github.com/liunanchenFYJJ
+ * @Date: 2020-03-13 09:42:26
+ * @LastEditors: https://github.com/liunanchenFYJJ
+ * @LastEditTime: 2020-03-13 10:43:10
+ -->
 <template>
   <div>
     Layout
@@ -5,9 +13,12 @@
     <router-link to="bar">bar</router-link>
     <button @click="toFoo">foo</button>
     <button>bar</button>
+    <button @click="BubbleSort">BubbleSort</button>
   </div>
 </template>
 <script>
+import BubbleSort from '@/util/BubbleSort';
+
 export default {
   name: 'Layout',
   mounted() {
@@ -17,6 +28,12 @@ export default {
     this.getFinalWeather();
   },
   methods: {
+    BubbleSort() {
+      let testArr = [3,2,1,5,6,7,1];
+      let arr = BubbleSort(testArr);
+      console.log(arr);
+      console.log(testArr);
+    },
     toFoo() {
       this.$router.push({path: 'test', query: {name: 's'}});
     },
