@@ -4,11 +4,11 @@
  * @Author: https://github.com/liunanchenFYJJ
  * @Date: 2020-03-13 10:01:37
  * @LastEditors: https://github.com/liunanchenFYJJ
- * @LastEditTime: 2020-03-13 10:44:10
+ * @LastEditTime: 2020-03-13 14:55:05
  */
 /**
  * 
- * @param {*} arr1 
+ * @param {*} arr1 传入的数组
  * @param {*} orderBy 'ASC' 'DESC'
  */
 function BubbleSort(arr1, orderBy = 'ASC') {
@@ -33,8 +33,6 @@ function BubbleSort(arr1, orderBy = 'ASC') {
         temp = arr[i];
         arr[i] = arr[i+1];
         arr[i+1] = temp
-      } else {
-        continue;
       }
     }
   }

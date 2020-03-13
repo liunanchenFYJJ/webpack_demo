@@ -4,7 +4,7 @@
  * @Author: https://github.com/liunanchenFYJJ
  * @Date: 2020-03-13 09:42:26
  * @LastEditors: https://github.com/liunanchenFYJJ
- * @LastEditTime: 2020-03-13 10:43:10
+ * @LastEditTime: 2020-03-13 15:15:44
  -->
 <template>
   <div>
@@ -13,11 +13,12 @@
     <router-link to="bar">bar</router-link>
     <button @click="toFoo">foo</button>
     <button>bar</button>
-    <button @click="BubbleSort">BubbleSort</button>
+    <button @click="sort">sort</button>
   </div>
 </template>
 <script>
 import BubbleSort from '@/util/BubbleSort';
+import SelectionSort from '@/util/SelectionSort';
 
 export default {
   name: 'Layout',
@@ -28,11 +29,20 @@ export default {
     this.getFinalWeather();
   },
   methods: {
-    BubbleSort() {
-      let testArr = [3,2,1,5,6,7,1];
-      let arr = BubbleSort(testArr);
+    sort() {
+      let testArr = [2,3,1];
+      // for (let k = 0; k < 100000; k++) {
+      //   testArr.push(Number((Math.random() * 100).toFixed()));
+      // }
+      let t_start = new Date();
+      let t_start_s = t_start.getTime();
+      // let arr = BubbleSort(testArr);
+      let arr = SelectionSort(testArr);
       console.log(arr);
       console.log(testArr);
+      let t_end = new Date();
+      let t_end_s = t_end.getTime();
+      console.log(t_end_s - t_start_s);
     },
     toFoo() {
       this.$router.push({path: 'test', query: {name: 's'}});
