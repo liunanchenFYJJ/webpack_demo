@@ -10,6 +10,7 @@
   <div>
     echarts示例页面
     <div id="myCharts"></div>
+    <img :src="url" alt="">
     <!-- TODO: 绑定到div和canvas和svg的区别？ 为什么canvas的拉长变形 -->
     <!-- svg不变形 -->
     <!-- <canvas id="myCharts" style="height: 400px; width: 400px;"></canvas> -->
@@ -27,7 +28,12 @@ export default {
       myCharts: null,
       option: {
         title: {
-          text: 'ECharts 入门示例'
+          text: 'title\n ECharts 入门示例',
+          textStyle: {
+            color: 'rgba(255,255,255, 1)',
+            textBorderColor: 'transparent',
+          },
+          subtext: 'sub',
         },
         tooltip: {},
         xAxis: {
@@ -40,6 +46,7 @@ export default {
           data: [5, 20, 36, 10, 10, 20]
         }]
       },
+      url: '',
     };
   },
   mounted() {
@@ -55,12 +62,18 @@ export default {
     window.onresize = _.debounce(() => {
       console.log('resize');
       console.log(this);
-      // this.myCharts.resize({
-      //   width: 330,
-      //   height: 330,
-      //   silent: true,
-      // });
+      this.myCharts.resize({
+        width: 330,
+        height: 330,
+        silent: true,
+      });
     }, 1000);
+    this.url = this.myCharts.getDataURL({
+      type: 'png',
+      pixelRatio: 2,
+      backgroundColor: '#fff',
+    });
+    console.log(this.url);
   },
   methods: {
     initMyCharts() {
